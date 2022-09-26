@@ -20,6 +20,7 @@ function NavBar() {
                 <li><Link to="taglist"><button>tag list</button></Link>
 
                 </li>
+                <li><Link to="quiz"><button>quiz</button></Link>            </li>
 
 
 
