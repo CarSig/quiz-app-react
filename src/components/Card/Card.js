@@ -4,9 +4,13 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 
 
-
 function Card({ card, cards, setCards }) {
     const [hidden, setHidden] = useState(true)
+
+    useEffect(() => {
+        localStorage.setItem("cards", JSON.stringify(cards))
+    }, [cards])
+
 
     function toggleBookmark() {
         const updatedCard = { ...card, bookmarked: !card.bookmarked }
@@ -16,7 +20,7 @@ function Card({ card, cards, setCards }) {
             }
             return c
         })
-        localStorage.setItem("cards", JSON.stringify(cards))
+
         setCards(newArr)
 
     }
@@ -30,9 +34,10 @@ function Card({ card, cards, setCards }) {
             <div onClick={toggleBookmark}>
                 {card.bookmarked ? <AiFillStar style={{ fontSize: "1.4rem" }} /> : <AiOutlineStar style={{ fontSize: "1.4rem" }} />}</div>
 
+
+
+
             <h2 style={{ marginBottom: "2rem" }}>{card.question}</h2>
-
-
             <button onClick={toggleHidden} style={{ marginBottom: "2rem" }}>{hidden ? "Show" : "Hide"} answer</button>
             {!hidden ? <p style={{ marginBottom: "2rem" }}>{card.answer}</p> : null
             }

@@ -45,24 +45,27 @@ function App() {
 
 
   return (
+
     <div className="App">
-      <Header />
+      <BrowserRouter>
+        <Header />
 
 
-      <main className='main-container'>,
+        <main className='main-container'>,
 
-        <BrowserRouter>
+
           <Routes>
             <Route path="/" element={
               <Home cards={cards} setCards={setCards} />}></Route>
             <Route path="/bookmarks" element={<Bookmarks cards={cards} setCards={setCards} />}></Route>
             <Route path="/about" element={<About />}></Route>
           </Routes>
-        </BrowserRouter>
 
-      </main>
 
-      <NavBar />
+        </main>
+
+        <NavBar />
+      </BrowserRouter>
     </div >
 
   );
