@@ -29,8 +29,7 @@ function Card({ card, cards, setCards }) {
         <div className="card-container" >
             <div onClick={toggleBookmark}>
                 {card.bookmarked ? <AiFillStar style={{ fontSize: "1.4rem" }} /> : <AiOutlineStar style={{ fontSize: "1.4rem" }} />}</div>
-            <h1>Index: {cards.findIndex(c => c.id === card.id)}</h1>
-            <p>{card.bookmarked.toString()}</p>
+
             <h2 style={{ marginBottom: "2rem" }}>{card.question}</h2>
 
 
