@@ -55,7 +55,7 @@ function App() {
           <Routes>
             <Route path="/" element={
               <Home cards={cards} setCards={setCards} />}></Route>
-            <Route path="/bookmarks" element={<Bookmarks cards={cards} />}></Route>
+            <Route path="/bookmarks" element={<Bookmarks cards={cards} setCards={setCards} />}></Route>
             <Route path="/about" element={<About />}></Route>
           </Routes>
         </BrowserRouter>

@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Card from '../components/Card/Card'
 
-function Bookmarks({ cards }) {
+function Bookmarks({ cards, setCards }) {
+    const storageCards = JSON.parse(localStorage.getItem("cards"))
+
+
     return (
         <div>
             <h1>Bookmarks</h1>
-            {cards.filter(function (card) { return card.bookmarked === true }).map(function (card) {
-                return <Card key={card.id} question={card.question} answer={card.answer} tags={card.tags} bookmarked={card.bookmarked} />
+            {storageCards.filter(function (card) { return card.bookmarked === true }).map(function (card) {
+                return <Card key={card.id} card={card} cards={cards} setCards={setCards} />
             })
 
 

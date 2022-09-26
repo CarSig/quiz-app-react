@@ -5,15 +5,20 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 
 
-function Card({ question, answer, tags, bookmarked }) {
-    const [mark, setMark] = useState(bookmarked)
-
-
+function Card({ card, cards, setCards }) {
     const [hidden, setHidden] = useState(true)
 
     function toggleBookmark() {
-        const newCard =
-            setMark(!mark)
+        const updatedCard = { ...card, bookmarked: !card.bookmarked }
+        const newArr = cards.map(function (c) {
+            if (c.id === card.id) {
+                return updatedCard
+            }
+            return c
+        })
+        localStorage.setItem("cards", JSON.stringify(cards))
+        setCards(newArr)
+
     }
 
     function toggleHidden() {
@@ -23,18 +28,19 @@ function Card({ question, answer, tags, bookmarked }) {
     return (
         <div className="card-container" >
             <div onClick={toggleBookmark}>
-                {mark ? <AiFillStar style={{ fontSize: "1.4rem" }} /> : <AiOutlineStar style={{ fontSize: "1.4rem" }} />}</div>
-
-            <h2 style={{ marginBottom: "2rem" }}>{question}</h2>
+                {card.bookmarked ? <AiFillStar style={{ fontSize: "1.4rem" }} /> : <AiOutlineStar style={{ fontSize: "1.4rem" }} />}</div>
+            <h1>Index: {cards.findIndex(c => c.id === card.id)}</h1>
+            <p>{card.bookmarked.toString()}</p>
+            <h2 style={{ marginBottom: "2rem" }}>{card.question}</h2>
 
 
             <button onClick={toggleHidden} style={{ marginBottom: "2rem" }}>{hidden ? "Show" : "Hide"} answer</button>
-            {!hidden ? <p style={{ marginBottom: "2rem" }}>{answer}</p> : null
+            {!hidden ? <p style={{ marginBottom: "2rem" }}>{card.answer}</p> : null
             }
 
             <ul>
-                {tags.map(function (tag) {
-                    return <li>#{tag}</li>
+                {card.tags.map(function (tag) {
+                    return <li key={tag}>#{tag}</li>
                 })}
             </ul>
 
