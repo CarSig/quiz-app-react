@@ -17,7 +17,9 @@ function NavBar() {
                 <li>
                     <Link to="/about"><button>about</button></Link>
                 </li>
+                <li><Link to="taglist"><button>tag list</button></Link>
 
+                </li>
 
 
 

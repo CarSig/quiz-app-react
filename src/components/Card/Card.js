@@ -11,7 +11,6 @@ function Card({ card, cards, setCards }) {
         localStorage.setItem("cards", JSON.stringify(cards))
     }, [cards])
 
-
     function toggleBookmark() {
         const updatedCard = { ...card, bookmarked: !card.bookmarked }
         const newArr = cards.map(function (c) {
@@ -20,10 +19,10 @@ function Card({ card, cards, setCards }) {
             }
             return c
         })
-
         setCards(newArr)
-
     }
+
+
 
     function toggleHidden() {
         setHidden(!hidden)
@@ -35,8 +34,6 @@ function Card({ card, cards, setCards }) {
                 {card.bookmarked ? <AiFillStar style={{ fontSize: "1.4rem" }} /> : <AiOutlineStar style={{ fontSize: "1.4rem" }} />}</div>
 
 
-
-
             <h2 style={{ marginBottom: "2rem" }}>{card.question}</h2>
             <button onClick={toggleHidden} style={{ marginBottom: "2rem" }}>{hidden ? "Show" : "Hide"} answer</button>
             {!hidden ? <p style={{ marginBottom: "2rem" }}>{card.answer}</p> : null
@@ -44,7 +41,9 @@ function Card({ card, cards, setCards }) {
 
             <ul>
                 {card.tags.map(function (tag) {
-                    return <li key={tag}>#{tag}</li>
+                    return <li key={tag}><a href={`tags/${tag}`}>#{tag}</a>
+
+                    </li>
                 })}
             </ul>
 
