@@ -4,11 +4,7 @@ function TagList({ cards }) {
     return (
         <div><h1>Tag List</h1>
             {
-                // show all tags from elements in cards array
-                // use .flat() to flatten the array of arrays
-                // use .filter() to remove duplicates
-                // sort alphabetically
-                // use .map() to render the tags
+
                 cards.map(function (card) {
                     return card.tags
                 }).flat().filter(function (tag, index, array) {

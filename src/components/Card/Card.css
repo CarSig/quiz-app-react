@@ -5,6 +5,22 @@
   text-overflow: clip;
 }
 
-.bookmarked {
-  border-left: solid 10px green;
+.answerSelection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px 0 10px 20px;
+}
+
+.answer {
+  cursor: pointer;
+}
+
+.answer:hover {
+  background-color: #e6e6e6;
+}
+
+.selectedAnswer {
+  font-weight: 800;
+  cursor: pointer;
 }
