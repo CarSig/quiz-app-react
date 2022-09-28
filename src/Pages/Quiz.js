@@ -4,28 +4,20 @@ import CategoryLists from './Lists/CategoryLists'
 import TagList from './TagList'
 
 function Quiz({ cards }) {
-    const removeDuplicates = function (item, index, array) {
-        return array.indexOf(item) === index
+
+    function startValue(value) {
+        const removeDuplicates = function (item, index, array) {
+            return array.indexOf(item) === index
+        }
+        return cards.map(function (card) {
+            return card.groups[value]
+        }).flat().filter(removeDuplicates).sort()
     }
-    // get all categories
-    const categories = cards.map(function (card) {
-        return card.groups.category
-    }).flat().filter(removeDuplicates).sort()
 
 
-    // get all continents
-    const continents = cards.map(function (card) {
-        return card.groups.continent
-    }).flat().filter(removeDuplicates).sort()
-
-    // get all difficulties
-    const difficulties = cards.map(function (card) {
-        return card.groups.difficulty
-    }).flat().filter(removeDuplicates).sort()
-
-    const [selectedCategories, setSelectedCategories] = useState(categories)
-    const [selectedContinents, setSelectedContinents] = useState(continents)
-    const [selectedDifficulties, setSelectedDifficulties] = useState(difficulties)
+    const [selectedCategories, setSelectedCategories] = useState(startValue("category"))
+    const [selectedContinents, setSelectedContinents] = useState(startValue("continent"))
+    const [selectedDifficulties, setSelectedDifficulties] = useState(startValue("difficulty"))
     const [numberOfQuestions, setNumberOfQuestions] = useState(4)
     const [quiz, setQuiz] = useState([])
     const [points, setPoints] = useState(0)
@@ -57,28 +49,14 @@ function Quiz({ cards }) {
     }
 
 
-    function getRandomCards(x) {
-        const randomCards = []
-        for (let i = 0; i < x; i++) {
-            const randomCard = cards[Math.floor(Math.random() * cards.length)]
-            if (!randomCards.includes(randomCard)) {
 
-                randomCards.push(randomCard)
-
-            } else {
-                i--
-            }
-        }
-        setQuiz(randomCards)
-        setStarted(true)
-    }
     return (
         <div><h1>Quiz</h1>
             {!started ?
                 <div>
                     <CategoryLists cards={cards} />
-                    <button onClick={() => { getRandomCards(3) }}>Start Quiz</button>
-                    <button onClick={() => { getQuiz(3, ["History", "Geography"], ["Europe"], ["easy"]) }}>Start Quiz2</button>
+
+                    <button onClick={() => { getQuiz(3, ["History", "Geography"], ["Europe"], ["easy"]) }}>Start Quiz</button>
                 </div> :
                 <div>
                     <button onClick={() => { setStarted(false) }}>Reset Quiz</button>
@@ -87,7 +65,7 @@ function Quiz({ cards }) {
                         return <QuizCard key={card.id} card={card} cards={cards} points={points} setPoints={setPoints} finished={finished} setFinished={setFinished} />
                     })}
 
-                    {finished ? <h1>Points: of {numberOfQuestions}</h1> : <button onClick={() => setFinished(true)}>Submit Answers</button>}
+                    {finished ? <h1>Points: of {3}</h1> : <button onClick={() => setFinished(true)}>Submit Answers</button>}
                 </div>
             }
 
